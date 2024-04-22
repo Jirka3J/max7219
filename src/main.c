@@ -61,16 +61,25 @@ int main(void)
     init();
     display(DECODE_MODE, 0b11111111);
     display(SCAN_LIMIT, 0x7);
-    display(INTENSITY, 1);
+    display(INTENSITY, 0x6);
     display(DISPLAY_TEST, DISPLAY_TEST_OFF);
-    display(SHUTDOWN,SHUTDOWN_OFF);
+    display(SHUTDOWN,SHUTDOWN_ON);
+    display(DIGIT0, 0xF);
+    display(DIGIT1, 0xF);
+    display(DIGIT2, 0xF);
+    display(DIGIT3, 0xF);
+    display(DIGIT4, 0xF);
+    display(DIGIT5, 0xF);
+    display(DIGIT6, 0xF);
+    display(DIGIT7, 0xF);
+
     uint32_t time = 0;
 
 
 
     while (1) {
 
-        display(DIGIT1, 0x8);
+
         if (milis() - time > 333 ) {
             time = milis();
             display(DIGIT0, 0x1);
