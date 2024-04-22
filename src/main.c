@@ -36,8 +36,9 @@ void display(uint8_t address, uint8_t data)
         }else{
             LOW(DIN);
         }
-    }
         mask = mask >> 1;
+    }
+        
     while(mask){
         if (address&mask){
             HIGH(DIN);
@@ -46,12 +47,14 @@ void display(uint8_t address, uint8_t data)
         }
         HIGH(CLK);
         LOW(CLK);
+        mask = mask >> 1;
     }
     HIGH(CS);
 }
 
 int main(void)
 {
+    init();
     display(DECODE_MODE, 0b11111111);
     display(SCAN_LIMIT, 0x07);
     display(INTENSITY, 1);
@@ -59,14 +62,14 @@ int main(void)
     display(SHUTDOWN,SHUTDOWN_OFF);
     uint32_t time = 0;
 
-    init();
+
 
     while (1) {
 
-
+        display(DIGIT1, 0xF);
         if (milis() - time > 333 ) {
             time = milis();
-            display(DIGIT0, 0x01);
+            display(DIGIT0, 0x1);
         }
 
     }
