@@ -27,7 +27,18 @@ void init(void)
 
 void display(uint8_t address, uint8_t data)
 {
-    
+    uint8_t mask;
+    LOW(CS);
+    mask = 0b10000000;
+    while(mask){
+        if (data&mask){
+            HIGH(DIN);
+        }else{
+            LOW(DIN);
+        }
+        mask = mask >> 1;
+    }
+    HIGH(CS);
 }
 
 int main(void)
